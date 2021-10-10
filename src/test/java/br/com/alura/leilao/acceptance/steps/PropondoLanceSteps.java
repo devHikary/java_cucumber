@@ -37,7 +37,7 @@ public class PropondoLanceSteps {
 		lance = new Lance(usuario, BigDecimal.TEN);
 	}
 
-	@Quando("o propoe ao leilao")
+	@Quando("propoe ao leilao")
 	public void quando_o_propoe_o_lance() {
 		leilao.propoe(lance);
 	}
@@ -54,7 +54,7 @@ public class PropondoLanceSteps {
 		lista.add(lance);
 	}
 
-	@Quando("o propoe varios lances ao leilao")
+	@Quando("propoe varios lances ao leilao")
 	public void o_propoe_varios_lances_ao_leilao() {
 		this.lista.forEach(lance -> leilao.propoe(lance));
 	}
@@ -65,6 +65,22 @@ public class PropondoLanceSteps {
 		Assert.assertEquals(this.lista.get(0).getValor(), leilao.getLances().get(0).getValor());
 		Assert.assertEquals(this.lista.get(1).getValor(), leilao.getLances().get(1).getValor());
 	}
+	
+	@Dado("um lance invalido de {double} reais e do usuario {string}")
+	public void um_lance_invalido_de_reais_e_do_usuario(Double valor, String nomeUsuario) {
+		this.lance = new Lance(new BigDecimal(valor));
+
+	}
 
 
+	@Entao("o lance nao eh aceito")
+	public void o_lance_nao_eh_aceito() {
+		Assert.assertEquals(0, leilao.getLances().size());
+	}
+
+	@Entao("o segundo lance não eh aceito")
+	public void o_segundo_lance_não_eh_aceito() {
+		Assert.assertEquals(1, leilao.getLances().size());
+		Assert.assertEquals(this.lista.get(0).getValor(), leilao.getLances().get(0).getValor());
+	}
 }
