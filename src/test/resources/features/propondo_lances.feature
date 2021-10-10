@@ -24,7 +24,9 @@ Exemplos:
 	|-100  |beltrano   | 
 	
 Cenario: Propondo uma sequencia de lances
-	Dado um lance de 10.0 reais do usuario "fulano"
-	E um lance de 15.0 reais do usuario "fulano"
+	Dado dois lances
+	|valor   |nomeUsuario|
+	|10.0	 |fulano     |
+	|15.0    |fulano     |
 	Quando propoe varios lances ao leilao
 	Entao o segundo lance não eh aceito
