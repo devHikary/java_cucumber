@@ -37,6 +37,17 @@ public class LeiloesPage {
 
 		return new NovoLeilaoPage(driver);
 	}
+	
+	public void esperaCarregarPaginaDeLeiloes() {
+		WebDriverWait wait = new WebDriverWait(driver,2);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Todos leilões')]")));
+	}
+	
+	public boolean estaNaPaginaDeLeiloes() {
+		esperaCarregarPaginaDeLeiloes();
+		return this.driver.getCurrentUrl().endsWith("/leiloes");
+	}
+	
 
 	public DetalhesDoLeilaoPage visitaLeilaoPaginaParaDarLance() {
 		driver.findElement(By.linkText("dar lance")).click();
